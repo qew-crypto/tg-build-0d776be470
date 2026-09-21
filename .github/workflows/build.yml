@@ -1,0 +1,72 @@
+name: Telegram build
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.12.1'
+      - name: Build (ручной файл main.yml)
+        shell: bash
+        working-directory: '.'
+        run: |
+          name: Build Mod
+          
+          on:
+            push:
+              branches: ["main"]
+            workflow_dispatch:
+          
+          jobs:
+            build:
+              runs-on: ubuntu-latest
+          
+              permissions:
+                contents: read
+          
+              steps:
+                - name: Checkout
+                  uses: actions/checkout@v4
+          
+                - name: Set up JDK 21
+                  uses: actions/setup-java@v5
+                  with:
+                    java-version: "21"
+                    distribution: "temurin"
+          
+                - name: Setup Gradle
+                  uses: gradle/actions/setup-gradle@v4
+                  with:
+                    gradle-version: "8.11.1"
+          
+                - name: Build
+                  run: gradle build
+          
+                - name: Upload JAR
+                  uses: actions/upload-artifact@v4
+                  with:
+                    name: Rchalange-jar
+                    path: build/libs/*.jar
+      - uses: actions/upload-artifact@v4
+        with:
+          name: build-result
+          path: |
+            **/*.jar
+            **/*.apk
+            !**/*-sources.jar
+            !**/*-javadoc.jar
+            !**/.gradle/**
+          if-no-files-found: error
+          retention-days: 3

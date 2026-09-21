@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "id": "rchallenge",
+  "version": "${version}",
+  "name": "R Challenge",
+  "description": "Общее испытание: событие, русская буква и таймер.",
+  "authors": ["diannerobertson8.62.36"],
+  "license": "MIT",
+  "environment": "*",
+  "entrypoints": {
+    "main": ["dev.rchallenge.RChallengeMod"],
+    "client": ["dev.rchallenge.client.RChallengeClient"]
+  },
+  "depends": {
+    "fabricloader": ">=0.16.10",
+    "minecraft": "~1.21.4",
+    "java": ">=21",
+    "fabric-api": "*"
+  }
+}

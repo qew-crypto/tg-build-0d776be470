@@ -1,0 +1,6 @@
+{
+  "rchallenge.started": "Испытание запущено!",
+  "rchallenge.rerolled": "Задание заменено.",
+  "rchallenge.denied": "Только оператор может использовать эту команду.",
+  "rchallenge.help": "Команды: .r start, .r reroll"
+}
